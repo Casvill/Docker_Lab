@@ -18,7 +18,7 @@ services:
     image: tina237/cali-service:v1
     environment:
       STUDENT_NAME: Valentina Nitola
-      HOOD: Ciudad Jardin
+      BARRIO: Ciudad Jardin
     networks:
       - ciudad-jardin
     volumes:
