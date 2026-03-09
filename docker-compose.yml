@@ -1,14 +1,19 @@
-version: "3"
-
 services:
 
   svc-daniel:
     image: casvill/cali-service:v1
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
     environment:
       STUDENT_NAME: Daniel
-      HOOD: Los Alcazares
+      HOOD: "Los Alcazares"
     networks:
       - los-alcazares
+      - cali
     volumes:
       - biblioteca-del-pueblo:/var/log/app
     ports:
@@ -17,10 +22,11 @@ services:
   svc-tina:
     image: tina237/cali-service:v1
     environment:
-      STUDENT_NAME: Valentina Nitola
-      BARRIO: Ciudad Jardin
+      STUDENT_NAME: "Valentina Nitola"
+      BARRIO: "Ciudad Jardin"
     networks:
       - ciudad-jardin
+      - cali
     volumes:
       - biblioteca-del-pueblo:/var/log/app
     ports:
@@ -29,6 +35,7 @@ services:
 networks:
   los-alcazares:
   ciudad-jardin:
+  cali:
 
 volumes:
   biblioteca-del-pueblo:
